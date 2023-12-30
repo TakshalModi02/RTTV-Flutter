@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'UI/screens/Login Screen/view/login_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,12 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          textTheme: TextTheme(displaySmall: TextStyle(color: Colors.white),displayMedium:  TextStyle(color: Colors.white)),
+          primarySwatch: Colors.brown,
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.white,
+          )
       ),
-      home: Container(child: Text("HelLo RTTV!"),)
+      home: LoginPage(),
+
     );
   }
 }
