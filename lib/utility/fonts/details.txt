@@ -1,0 +1,1 @@
+- This directory would contains fonts which will get used in this application

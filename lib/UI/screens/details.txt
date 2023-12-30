@@ -1,0 +1,5 @@
+- Each screen would have specific directory for it, that would be created in this folder
+- Each screen would model, view and controller folder inside it
+- Model - Contains model of data that would be used in that screen
+- Controller - Contains logic of calling an API and returning result
+- View - Contains code related to UI that is to be displayed in that screen

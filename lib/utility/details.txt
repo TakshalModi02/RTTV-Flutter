@@ -1,0 +1,3 @@
+- This directory would contain files which has customized buttons or other customized things
+- This directory only contains things which would be generalized to all application (like fonts)
+- Specific utility would be in UI directory
