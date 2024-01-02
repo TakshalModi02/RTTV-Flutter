@@ -1,0 +1,10 @@
+const String EMAIL = 'Enter Email';
+const String PASSWORD = 'Enter Password';
+const String CONFIRM_PASSWORD = 'Confirm Password';
+const String LOGIN = 'Login';
+const String SIGNUP = 'Sign Up';
+const String NEWUSER = 'New User?';
+const String CONTACTUS = 'Contact us';
+const String PRIVACYPOLICY = 'Privacy Policy';
+const String RTTVLOGO = 'assets/rttv_logo.png';
+const String BGIMAGE = "assets/bg_image.jpg";

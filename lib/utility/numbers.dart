@@ -1,0 +1,15 @@
+const double twelve = 12.0;
+const double sixty = 60.0;
+const double ten = 10.0;
+const double zero = 0.0;
+const double forty = 40.0;
+const double eight = 8.0;
+const double thirty = 30.0;
+const double eighteen = 18.0;
+const double thirtysix = 36.0;
+const double onehundredtwenty = 120.0;
+const double one = 1.0;
+const double four = 4.0;
+const double twentyfive = 25.0;
+const double twenty = 20.0;
+const double five = 5.0;

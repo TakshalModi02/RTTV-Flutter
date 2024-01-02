@@ -1,0 +1,22 @@
+import 'package:get/get.dart';
+import 'package:rttv/UI/screens/Login%20Screen/view/login_screen.dart';
+import 'package:rttv/UI/screens/SignUpScreen/view/signupScreen.dart';
+import 'package:rttv/UI/screens/splashScreen/splashScreen.dart';
+import 'package:rttv/resources/routes/routes_name.dart';
+
+class AppRoutes {
+  static appRoutes() => [
+        GetPage(
+          name: RouteName.splashScreen,
+          page: () => splashScreen(),
+        ),
+        GetPage(
+          name: RouteName.loginScreen,
+          page: () => LoginPage(),
+        ),
+        GetPage(
+          name: RouteName.signUpScreen,
+          page: () => SignUpScreen(),
+        ),
+      ];
+}
