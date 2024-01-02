@@ -2,22 +2,20 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rttv/UI/screens/Login%20Screen/controller/loginController.dart';
-import 'package:rttv/resources/routes/routes_name.dart';
+import 'package:rttv/UI/screens/SignUpScreen/controller/signUpController.dart';
+import 'package:rttv/UI/utility/Login_Screen/text_field.dart';
 import 'package:rttv/utility/numbers.dart';
 import 'package:rttv/utility/strings.dart';
 
-import '../../../utility/Login_Screen/text_field.dart';
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final loginController = Get.put(LoginController());
+class _SignUpScreenState extends State<SignUpScreen> {
+  final signUpController = Get.put(SignUpController());
   bool _isLoading = false;
 
   showSnackBar(BuildContext context, String content) {
@@ -68,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: thirty),
                             child: TextFieldInput(
-                                loginController.emailController.value,
+                                signUpController.emailController.value,
                                 EMAIL,
                                 TextInputType.emailAddress,
                                 false),
@@ -80,8 +78,21 @@ class _LoginPageState extends State<LoginPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: thirty),
                             child: TextFieldInput(
-                                loginController.passwordController.value,
+                                signUpController.passwordController.value,
                                 PASSWORD,
+                                TextInputType.visiblePassword,
+                                true),
+                          ),
+                          const SizedBox(
+                            height: eighteen,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: thirty),
+                            child: TextFieldInput(
+                                signUpController
+                                    .confirmpasswordController.value,
+                                CONFIRM_PASSWORD,
                                 TextInputType.visiblePassword,
                                 true),
                           ),
@@ -94,12 +105,14 @@ class _LoginPageState extends State<LoginPage> {
                             child: GestureDetector(
                               // Inside GestureDetector for Login button
                               onTap: () {
-                                loginController.loginApi(
-                                  loginController.emailController.value.text,
-                                  loginController.passwordController.value.text,
+                                signUpController.signupApi(
+                                  signUpController.emailController.value.text,
+                                  signUpController
+                                      .passwordController.value.text,
+                                  signUpController
+                                      .confirmpasswordController.value.text,
                                 );
                               },
-                              //Call Login function
                               child: Container(
                                 width: double.infinity,
                                 alignment: Alignment.center,
@@ -115,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Padding(
                                   padding: EdgeInsets.all(eight),
                                   child: Text(
-                                    LOGIN,
+                                    SIGNUP,
                                     style: TextStyle(
                                         fontSize: twentyfive,
                                         color: Colors.white,
@@ -127,33 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(
                             height: forty,
-                          ),
-                          FittedBox(
-                            fit: BoxFit.fitHeight,
-                            child: Row(
-                              children: [
-                                const Text(
-                                  NEWUSER,
-                                  style: TextStyle(
-                                      fontSize: twenty, color: Colors.white),
-                                ),
-                                const SizedBox(
-                                  width: ten,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(RouteName.signUpScreen);
-                                  },
-                                  child: const Text(
-                                    SIGNUP,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: twenty,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ],
                       ),

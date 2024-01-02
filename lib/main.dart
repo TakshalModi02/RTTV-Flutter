@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rttv/UI/screens/splashScreen/splashScreen.dart';
+import 'package:rttv/resources/routes/routes.dart';
 
 import 'UI/screens/Login Screen/view/login_screen.dart';
 
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           textTheme: TextTheme(displaySmall: TextStyle(color: Colors.white),displayMedium:  TextStyle(color: Colors.white)),
@@ -22,8 +25,8 @@ class MyApp extends StatelessWidget {
             fillColor: Colors.white,
           )
       ),
-      home: LoginPage(),
-
+      // home: splashScreen(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }
