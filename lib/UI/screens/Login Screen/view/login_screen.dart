@@ -98,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                                   loginController.emailController.value.text,
                                   loginController.passwordController.value.text,
                                 );
+                                Get.toNamed(RouteName.otpScreen);
                               },
                               //Call Login function
                               child: Container(
