@@ -68,10 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: thirty),
                             child: TextFieldInput(
-                                loginController.emailController.value,
-                                EMAIL,
-                                TextInputType.emailAddress,
-                                false),
+                                textEditingController: loginController.emailController.value,
+                                hintText: EMAIL,
+                                 textInputType: TextInputType.emailAddress,
+                                hideText: false,
+                                onChange: (str){
+
+                                },),
                           ),
                           const SizedBox(
                             height: eighteen,
@@ -80,10 +83,13 @@ class _LoginPageState extends State<LoginPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: thirty),
                             child: TextFieldInput(
-                                loginController.passwordController.value,
-                                PASSWORD,
-                                TextInputType.visiblePassword,
-                                true),
+                                textEditingController: loginController.passwordController.value,
+                                hintText: PASSWORD,
+                                textInputType: TextInputType.visiblePassword,
+                                hideText: true,
+                                onChange: (str){
+                                  
+                                },),
                           ),
                           const SizedBox(
                             height: thirtysix,

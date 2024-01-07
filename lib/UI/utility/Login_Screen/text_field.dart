@@ -5,22 +5,30 @@ class TextFieldInput extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
   final bool hideText;
+  final Function(String) onChange; // Change here
 
-  const TextFieldInput(this.textEditingController, this.hintText, this.textInputType, this.hideText, {super.key});
-
+  TextFieldInput({
+    required this.textEditingController,
+    required this.hintText,
+    required this.textInputType,
+    required this.hideText,
+    required this.onChange, // Change here
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final inputborder = OutlineInputBorder(
+    final inputBorder = OutlineInputBorder(
       borderSide: Divider.createBorderSide(context),
     );
     return TextField(
       controller: textEditingController,
+      onChanged: onChange, // Change here
       decoration: InputDecoration(
         hintText: hintText,
-        border: inputborder,
-        focusedBorder: inputborder,
-        enabledBorder: inputborder,
+        border: inputBorder,
+        focusedBorder: inputBorder,
+        enabledBorder: inputBorder,
         filled: true,
         contentPadding: const EdgeInsets.all(8),
       ),
