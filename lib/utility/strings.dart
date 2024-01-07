@@ -1,6 +1,8 @@
 const String EMAIL = 'Enter Email';
+const String PHONE_NUMBER = 'Enter Phone Number';
 const String PASSWORD = 'Enter Password';
 const String CONFIRM_PASSWORD = 'Confirm Password';
+const String AGE = 'Enter age';
 const String LOGIN = 'Login';
 const String SIGNUP = 'Sign Up';
 const String NEWUSER = 'New User?';
@@ -16,3 +18,5 @@ const String VERIFICATION_FAILED = "Verification Failed";
 const String VERIFICATION_FAILED_MSG = "Invalid OTP. Please try again.";
 const String SUBMIT_OTP = "Submit OTP";
 const String OK = "OK";
+const String CheckInternet = "Check your internet connection!!";
+const String SignUpSuccess = "OTP sent to your registered mobile number!!";
