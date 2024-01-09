@@ -16,6 +16,6 @@ class UserModel{
   }
 
   UserModel fromJson(Map<String, dynamic> map){
-    return UserModel(phone_number: map['phone_number'], age: map['age'], email: map['email'], password: map['password]']);
+    return UserModel(phone_number: map['phone_number'], age: map['age'], email: map['email'], password: map['password']);
   }
 }

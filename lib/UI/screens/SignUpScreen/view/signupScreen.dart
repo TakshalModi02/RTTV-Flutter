@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:rttv/UI/screens/SignUpScreen/controller/signUpController.dart';
 import 'package:rttv/UI/screens/SignUpScreen/model/user_model.dart';
 import 'package:rttv/UI/utility/Login_Screen/text_field.dart';
+import 'package:rttv/resources/routes/routes_name.dart';
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/numbers.dart';
 import 'package:rttv/utility/strings.dart';
@@ -62,135 +63,170 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         Expanded(
-                            child: Obx(() => ListView(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                  textEditingController: signUpController.phoneNoController.value,
-                                  hintText: PHONE_NUMBER,
-                                  textInputType: TextInputType.emailAddress,
-                                  hideText: false,
-                                  onChange: (str){
-                                    signUpController.checkPhoneNumber();
-                                  },),
-                            ),
-                            const SizedBox(
-                              height: eighteen,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                  textEditingController: signUpController.emailController.value,
-                                  hintText: EMAIL,
-                                  textInputType: TextInputType.emailAddress,
-                                  hideText: false,
-                                  onChange: (str){
-                                    signUpController.checkEmail();
-                                  }),
-                            ),
-                            const SizedBox(
-                              height: eighteen,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                  textEditingController: signUpController.ageController.value,
-                                  hintText: AGE,
-                                  textInputType: TextInputType.number,
-                                  hideText: false,
-                                  onChange: (str){
-                                    signUpController.checkAge();
-                                  }),
-                            ),
-                            const SizedBox(
-                              height: eighteen,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                  textEditingController: signUpController.passwordController.value,
-                                  hintText: PASSWORD,
-                                  textInputType: TextInputType.visiblePassword,
-                                  hideText: true,
-                                  onChange: (str){
-                                    signUpController.checkPassword();
-                                  },),
-                            ),
-                            const SizedBox(
-                              height: eighteen,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                  textEditingController: signUpController
-                                      .confirmpasswordController.value,
-                                  hintText: CONFIRM_PASSWORD,
-                                  textInputType: TextInputType.visiblePassword,
-                                  hideText: true,
-                                  onChange: (str){
-                                    signUpController.checkPassword();
-                                  }),
-                            ),
-                            const SizedBox(
-                              height: thirtysix,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: onehundredtwenty),
-                              child: GestureDetector(
-                                // Inside GestureDetector for Login button
-                                onTap: signUpController.isValid.value?() async {
-                                  signUpController.test();
-                                  PostResponseType result = await signUpController.signupApi(UserModel(
-                                    phone_number: signUpController.phoneNoController.value.text, 
-                                    age: signUpController.ageController.value.text, 
-                                    email: signUpController.emailController.value.text, 
-                                    password: signUpController.passwordController.value.text
-                                    ));
+                          child: Obx(
+                            () => ListView(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: thirty),
+                                  child: TextFieldInput(
+                                    textEditingController: signUpController
+                                        .phoneNoController.value,
+                                    hintText: PHONE_NUMBER,
+                                    textInputType: TextInputType.emailAddress,
+                                    hideText: false,
+                                    onChange: (str) {
+                                      signUpController.checkPhoneNumber();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: eighteen,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: thirty),
+                                  child: TextFieldInput(
+                                      textEditingController: signUpController
+                                          .emailController.value,
+                                      hintText: EMAIL,
+                                      textInputType: TextInputType.emailAddress,
+                                      hideText: false,
+                                      onChange: (str) {
+                                        signUpController.checkEmail();
+                                      }),
+                                ),
+                                const SizedBox(
+                                  height: eighteen,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: thirty),
+                                  child: TextFieldInput(
+                                      textEditingController:
+                                          signUpController.ageController.value,
+                                      hintText: AGE,
+                                      textInputType: TextInputType.number,
+                                      hideText: false,
+                                      onChange: (str) {
+                                        signUpController.checkAge();
+                                      }),
+                                ),
+                                const SizedBox(
+                                  height: eighteen,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: thirty),
+                                  child: TextFieldInput(
+                                    textEditingController: signUpController
+                                        .passwordController.value,
+                                    hintText: PASSWORD,
+                                    textInputType:
+                                        TextInputType.visiblePassword,
+                                    hideText: true,
+                                    onChange: (str) {
+                                      signUpController.checkPassword();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: eighteen,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: thirty),
+                                  child: TextFieldInput(
+                                      textEditingController: signUpController
+                                          .confirmpasswordController.value,
+                                      hintText: CONFIRM_PASSWORD,
+                                      textInputType:
+                                          TextInputType.visiblePassword,
+                                      hideText: true,
+                                      onChange: (str) {
+                                        signUpController.checkPassword();
+                                      }),
+                                ),
+                                const SizedBox(
+                                  height: thirtysix,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: onehundredtwenty),
+                                  child: GestureDetector(
+                                    // Inside GestureDetector for Login button
+                                    onTap: signUpController.isValid.value
+                                        ? () async {
+                                            signUpController.test();
+                                            PostResponseType result =
+                                                await signUpController.signupApi(UserModel(
+                                                    phone_number:
+                                                        signUpController
+                                                            .phoneNoController
+                                                            .value
+                                                            .text,
+                                                    age: signUpController
+                                                        .ageController
+                                                        .value
+                                                        .text,
+                                                    email: signUpController
+                                                        .emailController
+                                                        .value
+                                                        .text,
+                                                    password: signUpController
+                                                        .passwordController
+                                                        .value
+                                                        .text));
 
-                                    if(result.postResponseEnum == PostResponseEnum.success){
-                                      Get.snackbar("Success", result.message, snackPosition: SnackPosition.BOTTOM);
-                                    }else{
-                                      Get.snackbar("Error!!", result.message, snackPosition: SnackPosition.BOTTOM);
-                                    }
-                                }:(){},
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: one),
-                                  decoration: ShapeDecoration(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(four),
+                                            if (result.postResponseEnum ==
+                                                PostResponseEnum.success) {
+                                              Get.snackbar(
+                                                  SUCCESS, result.message,
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM);
+                                              Get.toNamed(RouteName.otpScreen, arguments: signUpController.phoneNoController.value.text);
+                                            } else {
+                                              Get.snackbar(
+                                                  ERROR, result.message,
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM);
+                                            }
+                                          }
+                                        : () {},
+                                    child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: one),
+                                      decoration: ShapeDecoration(
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(four),
+                                            ),
+                                          ),
+                                          color: signUpController.isValid.value
+                                              ? Colors.red
+                                              : Colors.grey),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(eight),
+                                        child: Text(
+                                          SIGNUP,
+                                          style: TextStyle(
+                                              fontSize: twentyfive,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      color: signUpController.isValid.value?Colors.red:Colors.grey),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(eight),
-                                    child: Text(
-                                      SIGNUP,
-                                      style: TextStyle(
-                                          fontSize: twentyfive,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: forty,
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: forty,
-                            ),
-                          ],
-                        )
-                        ,))
+                          ),
+                        ),
                       ],
                     ),
                   ),
