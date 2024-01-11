@@ -20,3 +20,5 @@ const String SUBMIT_OTP = "Submit OTP";
 const String OK = "OK";
 const String CheckInternet = "Check your internet connection!!";
 const String SignUpSuccess = "OTP sent to your registered mobile number!!";
+const String SUCCESS = "Success";
+const String ERROR = "Error";
