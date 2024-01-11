@@ -3,26 +3,25 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:rttv/UI/screens/Login%20Screen/model/loginResponseModel.dart';
-import 'package:rttv/UI/screens/Login%20Screen/model/userModel.dart';
+import 'package:rttv/UI/screens/SignUp_Screen/model/signup_response_model.dart';
+import 'package:rttv/UI/screens/SignUp_Screen/model/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/strings.dart';
 
-class LoginController extends GetxController {
+class SignUpController extends GetxController {
   final emailController = TextEditingController().obs;
-  final passwordController = TextEditingController().obs;
+  final ageController = TextEditingController().obs;
   final phoneNoController = TextEditingController().obs;
   final baseURL = dotenv.env['BASE_URL'];
   RxBool isValid = false.obs;
 
   bool validEmail = false;
   bool validPhoneNo = false;
-  bool validPassword = false;
+  bool validAge = false;
 
-  Future<PostResponseType> loginApi(userModel user) async{
-    final url = Uri.parse(baseURL! + "login");
-    print(user.toJson());
+  Future<PostResponseType> signupApi(UserModel user) async{
+    final url = Uri.parse(baseURL! + "signup");
     try{
       var res = await http.post(
         url,
@@ -32,9 +31,7 @@ class LoginController extends GetxController {
         body: jsonEncode(user.toJson()),
       );
       Map<String, dynamic> body = jsonDecode(res.body);
-      print(res.statusCode);
-      print(res.body);
-      loginResponseModel responseModel = loginResponseModel(body);
+      SignUpResponseModel responseModel = SignUpResponseModel(body);
       if(responseModel.code==1){
         return PostResponseType(postResponseEnum: PostResponseEnum.success, message: SignUpSuccess);
       }else{
@@ -45,13 +42,13 @@ class LoginController extends GetxController {
         }
       }
     }catch(err){
-      print(err);
+      debugPrint(err.toString());
       return PostResponseType(postResponseEnum: PostResponseEnum.failed, message: CheckInternet);
     }
   }
 
   void test(){
-    print("${baseURL}login");
+    print("${baseURL}signup");
   }
 
   void checkEmail(){
@@ -65,9 +62,15 @@ class LoginController extends GetxController {
     checkContraints();
   }
 
+  void checkAge() {
+    String age = ageController.value.text;
+    double number = double.parse(age);
+    validAge = number >= 0 && number > 5;
+    checkContraints();
+  }
 
   void checkContraints(){
-    if(validEmail && validPhoneNo && validPassword){
+    if(validEmail && validPhoneNo && validAge){
       isValid.value = true;
     }
   }

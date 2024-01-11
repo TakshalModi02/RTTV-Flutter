@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             fillColor: Colors.white,
           )
       ),
-      // home: splashScreen(),
+      // home: SplashScreen(),
       getPages: AppRoutes.appRoutes(),
     );
   }

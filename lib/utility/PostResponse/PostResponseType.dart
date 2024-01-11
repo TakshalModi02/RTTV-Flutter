@@ -9,8 +9,10 @@ class PostResponseType {
   PostResponseType({
     required this.postResponseEnum,
     this.message = "default",
+    this.data = ""
   });
 
   final PostResponseEnum postResponseEnum;
   final String message;
+  final String? data;
 }

@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rttv/UI/screens/Login%20Screen/controller/loginController.dart';
-import 'package:rttv/UI/screens/Login%20Screen/model/userModel.dart';
+import 'package:rttv/UI/screens/Login_Screen/controller/loginController.dart';
+import 'package:rttv/UI/screens/Login_Screen/model/loginModel.dart';
 import 'package:rttv/resources/routes/routes_name.dart';
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/numbers.dart';
@@ -11,14 +11,14 @@ import 'package:rttv/utility/strings.dart';
 
 import '../../../utility/Login_Screen/text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   final loginController = Get.put(LoginController());
   bool _isLoading = false;
 
@@ -67,18 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                                 scale: eight,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: thirty),
-                              child: TextFieldInput(
-                                textEditingController:
-                                    loginController.emailController.value,
-                                hintText: EMAIL,
-                                textInputType: TextInputType.emailAddress,
-                                hideText: false,
-                                onChange: (str) {},
-                              ),
-                            ),
                             const SizedBox(
                               height: eighteen,
                             ),
@@ -100,21 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                                   height: eighteen,
                                 ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: thirty),
-                              child: TextFieldInput(
-                                textEditingController:
-                                    loginController.passwordController.value,
-                                hintText: PASSWORD,
-                                textInputType: TextInputType.visiblePassword,
-                                hideText: true,
-                                onChange: (str) {},
-                              ),
-                            ),
-                            const SizedBox(
-                              height: thirtysix,
-                            ),
-                            Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: onehundredtwenty),
                               child: GestureDetector(
@@ -124,22 +97,16 @@ class _LoginPageState extends State<LoginPage> {
                                         loginController.test();
                                         PostResponseType result =
                                             await loginController.loginApi(
-                                          userModel(
+                                          LoginModel(
                                               phone_number: loginController
                                                   .phoneNoController.value.text,
-                                              email: loginController
-                                                  .emailController.value.text,
-                                              password: loginController
-                                                  .passwordController.value.text),
-                                        );
+                                        ));
                                         if (result.postResponseEnum ==
                                             PostResponseEnum.success) {
                                           Get.snackbar(SUCCESS, result.message,
                                               snackPosition:
                                                   SnackPosition.BOTTOM);
-                                          Get.toNamed(RouteName.otpScreen,
-                                              arguments: loginController
-                                                  .phoneNoController.value.text);
+                                          Get.toNamed(RouteName.otpScreen, arguments: {'phoneNumber': loginController.phoneNoController.value.text});
                                         } else {
                                           Get.snackbar(ERROR, result.message,
                                               snackPosition:
@@ -152,13 +119,13 @@ class _LoginPageState extends State<LoginPage> {
                                   alignment: Alignment.center,
                                   padding:
                                       const EdgeInsets.symmetric(vertical: one),
-                                  decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
+                                  decoration: ShapeDecoration(
+                                      shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(four),
                                         ),
                                       ),
-                                      color:  Colors.red),
+                                      color:  loginController.isValid.value?Colors.red:Colors.grey),
                                   child: const Padding(
                                     padding: EdgeInsets.all(eight),
                                     child: Text(

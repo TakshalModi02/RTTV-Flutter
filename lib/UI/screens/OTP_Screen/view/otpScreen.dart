@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import 'package:rttv/UI/screens/OTPScreen/controller/otpController.dart';
+import 'package:rttv/UI/screens/OTP_Screen/controller/otpController.dart';
 import 'package:rttv/resources/routes/routes_name.dart';
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/numbers.dart';
 import 'package:rttv/utility/strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class otpScreen extends StatefulWidget {
-  final String phoneNumber;
-  const otpScreen({Key? key, required this.phoneNumber}) : super(key: key);
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({Key? key}) : super(key: key);
 
   @override
-  State<otpScreen> createState() => _otpScreenState();
+  State<OtpScreen> createState() => _OtpScreenState();
 }
 
-class _otpScreenState extends State<otpScreen> {
+class _OtpScreenState extends State<OtpScreen> {
   final OtpController otpController = Get.put(OtpController());
   late String otp = '';
+  final String phoneNumber = Get.arguments?['phoneNumber'] ?? '';
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +39,7 @@ class _otpScreenState extends State<otpScreen> {
         ),
       ),
       body: SafeArea(
-        child: Obx(
-          () => Column(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,27 +49,29 @@ class _otpScreenState extends State<otpScreen> {
                   children: [
                     Image.asset(
                         'assets/otp_image.jpg', // Replace with your image path
-                        height: 410, // Adjust these factors as needed
+                        height: 350, // Adjust these factors as needed
                         width: 350 // Set width as per your requirement
                         ),
-                    OtpTextField(
-                      numberOfFields: 4,
-                      fieldWidth: sixty,
+                    Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: OtpTextField(
+                      numberOfFields: 6,
+                      fieldWidth: sixty/1.5,
                       borderColor: Colors.red,
                       showFieldAsBox: true,
                       onCodeChanged: (code) {
                         otp = code;
                       },
                       onSubmit: (code) {
-                        otpController.verifyOTP(widget.phoneNumber, otp);
+                        print(code);
+                        otp = code;
                       },
-                    ),
+                    ),),
                     SizedBox(
-                      height: twenty,
+                      height: twenty/2,
                     ),
                     Text(ENTER_OTP),
                     SizedBox(
-                      height: twenty,
+                      height: twenty/2,
                     ),
                   ],
                 ),
@@ -78,10 +81,15 @@ class _otpScreenState extends State<otpScreen> {
                 child: InkWell(
                   child: GestureDetector(
                     onTap: () async {
+                      print(phoneNumber);
+                      final SharedPreferences prefs = await _prefs;
                       PostResponseType result =
-                          await otpController.verifyOTP(widget.phoneNumber, otp);
+                          await otpController.verifyOTP(phoneNumber, otp);
                       if (result.postResponseEnum == PostResponseEnum.success) {
-                        Get.toNamed(RouteName.homeScreen);
+                        bool tokenSaved = await prefs.setString("token", result.data!);
+                        if(tokenSaved){
+                          Get.toNamed(RouteName.homeScreen, arguments: {'token':result.data});
+                        }
                       } else {
                         Get.snackbar(ERROR, result.message,
                             snackPosition: SnackPosition.BOTTOM);
@@ -114,7 +122,6 @@ class _otpScreenState extends State<otpScreen> {
               ),
             ],
           ),
-        ),
       ),
     );
   }

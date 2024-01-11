@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rttv/UI/screens/SignUpScreen/controller/signUpController.dart';
-import 'package:rttv/UI/screens/SignUpScreen/model/user_model.dart';
+import 'package:rttv/UI/screens/SignUp_Screen/controller/signUpController.dart';
+import 'package:rttv/UI/screens/SignUp_Screen/model/user_model.dart';
 import 'package:rttv/UI/utility/Login_Screen/text_field.dart';
 import 'package:rttv/resources/routes/routes_name.dart';
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
@@ -115,41 +115,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const SizedBox(
                                   height: eighteen,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: thirty),
-                                  child: TextFieldInput(
-                                    textEditingController: signUpController
-                                        .passwordController.value,
-                                    hintText: PASSWORD,
-                                    textInputType:
-                                        TextInputType.visiblePassword,
-                                    hideText: true,
-                                    onChange: (str) {
-                                      signUpController.checkPassword();
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: eighteen,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: thirty),
-                                  child: TextFieldInput(
-                                      textEditingController: signUpController
-                                          .confirmpasswordController.value,
-                                      hintText: CONFIRM_PASSWORD,
-                                      textInputType:
-                                          TextInputType.visiblePassword,
-                                      hideText: true,
-                                      onChange: (str) {
-                                        signUpController.checkPassword();
-                                      }),
-                                ),
-                                const SizedBox(
-                                  height: thirtysix,
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: thirty),
+                                //   child: TextFieldInput(
+                                //     textEditingController: signUpController
+                                //         .passwordController.value,
+                                //     hintText: PASSWORD,
+                                //     textInputType:
+                                //         TextInputType.visiblePassword,
+                                //     hideText: true,
+                                //     onChange: (str) {
+                                //       signUpController.checkPassword();
+                                //     },
+                                //   ),
+                                // ),
+                                // const SizedBox(
+                                //   height: eighteen,
+                                // ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: thirty),
+                                //   child: TextFieldInput(
+                                //       textEditingController: signUpController
+                                //           .confirmpasswordController.value,
+                                //       hintText: CONFIRM_PASSWORD,
+                                //       textInputType:
+                                //           TextInputType.visiblePassword,
+                                //       hideText: true,
+                                //       onChange: (str) {
+                                //         signUpController.checkPassword();
+                                //       }),
+                                // ),
+                                // const SizedBox(
+                                //   height: thirtysix,
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: onehundredtwenty),
@@ -172,10 +172,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     email: signUpController
                                                         .emailController
                                                         .value
-                                                        .text,
-                                                    password: signUpController
-                                                        .passwordController
-                                                        .value
                                                         .text));
 
                                             if (result.postResponseEnum ==
@@ -184,7 +180,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                   SUCCESS, result.message,
                                                   snackPosition:
                                                       SnackPosition.BOTTOM);
-                                              Get.toNamed(RouteName.otpScreen, arguments: signUpController.phoneNoController.value.text);
+                                                      print(signUpController.phoneNoController.value.text);
+                                              Get.toNamed(RouteName.otpScreen, arguments: {'phoneNumber': signUpController.phoneNoController.value.text});
                                             } else {
                                               Get.snackbar(
                                                   ERROR, result.message,

@@ -2,6 +2,7 @@ class otpResponseModel{
   int? code;
   String? status;
   String? message;
+  String? token;
   Map<String, dynamic>? user;
 
   otpResponseModel(Map<String, dynamic> map){
@@ -9,6 +10,7 @@ class otpResponseModel{
     status = map['status'];
     message = map['message'];
     user = map['user'];
+    token = map['token'];
   }
 
   Map<String, dynamic> toJson(){
@@ -16,6 +18,7 @@ class otpResponseModel{
       'code': code,
       'status': status,
       'message': message,
+      'token': token,
       'user': user
     };
   }
