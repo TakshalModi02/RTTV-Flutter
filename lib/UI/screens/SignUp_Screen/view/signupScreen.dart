@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rttv/UI/screens/SignUp_Screen/controller/signUpController.dart';
 import 'package:rttv/UI/screens/SignUp_Screen/model/user_model.dart';
 import 'package:rttv/UI/utility/Login_Screen/text_field.dart';
@@ -113,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       }),
                                 ),
                                 const SizedBox(
-                                  height: eighteen,
+                                  height: twentyfive,
                                 ),
                                 // Padding(
                                 //   padding: const EdgeInsets.symmetric(
@@ -204,11 +205,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           color: signUpController.isValid.value
                                               ? Colors.red
                                               : Colors.grey),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(eight),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(eight),
                                         child: Text(
                                           SIGNUP,
-                                          style: TextStyle(
+                                          style: GoogleFonts.ptSerif(
                                               fontSize: twentyfive,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -237,9 +238,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {},
-                              child: const Text(
+                              child: Text(
                                 CONTACTUS,
-                                style: TextStyle(
+                                style: GoogleFonts.ptSerif(
                                     fontSize: five, color: Colors.white),
                               ),
                             ),
@@ -248,9 +249,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: const Text(
+                              child: Text(
                                 PRIVACYPOLICY,
-                                style: TextStyle(
+                                style: GoogleFonts.ptSerif(
                                     fontSize: five, color: Colors.white),
                               ),
                             ),
