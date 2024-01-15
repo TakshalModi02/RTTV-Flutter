@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:rttv/UI/screens/Login_Screen/view/login_screen.dart';
 import 'package:rttv/UI/screens/Splash_Screen/controller/splashServices.dart';
+import 'package:rttv/utility/strings.dart';
+import 'dart:ui';
+import 'package:rttv/utility/numbers.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,14 +31,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset(
-          'assets/rttv_logo.png',
-          height: 200,
-          width: 200,
-          fit: BoxFit.contain,
-        ),
-      ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(BGIMAGE),
+              fit: BoxFit.cover,
+            ),
+          ),
+        child: BackdropFilter(filter:ImageFilter.blur(sigmaX: ten, sigmaY: ten),
+          child: Center(
+            child: Hero(
+              child: Image.asset(
+                'assets/rttv_logo.png',
+                height: 200,
+                width: 200,
+                fit: BoxFit.contain,
+              ),
+            tag: 'logo',
+            )
+          ),
+        )
+      )
     );
   }
 }
