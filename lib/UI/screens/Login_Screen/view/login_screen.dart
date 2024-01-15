@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rttv/UI/screens/Login_Screen/controller/loginController.dart';
 import 'package:rttv/UI/screens/Login_Screen/model/loginModel.dart';
 import 'package:rttv/resources/routes/routes_name.dart';
@@ -71,42 +72,48 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: eighteen,
                             ),
                             Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: thirty),
-                                  child: TextFieldInput(
-                                    textEditingController: loginController
-                                        .phoneNoController.value,
-                                    hintText: PHONE_NUMBER,
-                                    textInputType: TextInputType.emailAddress,
-                                    hideText: false,
-                                    onChange: (str) {
-                                      loginController.checkPhoneNumber();
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: eighteen,
-                                ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: thirty),
+                              child: TextFieldInput(
+                                textEditingController:
+                                    loginController.phoneNoController.value,
+                                hintText: PHONE_NUMBER,
+                                textInputType: TextInputType.emailAddress,
+                                hideText: false,
+                                onChange: (str) {
+                                  loginController.checkPhoneNumber();
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: onehundredtwenty),
                               child: GestureDetector(
-                                // Inside GestureDetector for Login button
                                 onTap: loginController.isValid.value
                                     ? () async {
                                         loginController.test();
                                         PostResponseType result =
                                             await loginController.loginApi(
                                           LoginModel(
-                                              phone_number: loginController
-                                                  .phoneNoController.value.text,
-                                        ));
+                                            phone_number: loginController
+                                                .phoneNoController.value.text,
+                                          ),
+                                        );
                                         if (result.postResponseEnum ==
                                             PostResponseEnum.success) {
                                           Get.snackbar(SUCCESS, result.message,
                                               snackPosition:
                                                   SnackPosition.BOTTOM);
-                                          Get.toNamed(RouteName.otpScreen, arguments: {'phoneNumber': loginController.phoneNoController.value.text});
+                                          Get.toNamed(RouteName.otpScreen,
+                                              arguments: {
+                                                'phoneNumber': loginController
+                                                    .phoneNoController
+                                                    .value
+                                                    .text
+                                              });
                                         } else {
                                           Get.snackbar(ERROR, result.message,
                                               snackPosition:
@@ -116,24 +123,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     : () {},
                                 child: Container(
                                   width: double.infinity,
+                                  height: 70, // Adjust the height as needed
                                   alignment: Alignment.center,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: one),
-                                  decoration: ShapeDecoration(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(four),
-                                        ),
-                                      ),
-                                      color:  loginController.isValid.value?Colors.red:Colors.grey),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(eight),
-                                    child: Text(
-                                      LOGIN,
-                                      style: TextStyle(
-                                          fontSize: twentyfive,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: loginController.isValid.value
+                                        ? Colors.red
+                                        : Colors.grey,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(eight),
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: thirty,
                                     ),
                                   ),
                                 ),
@@ -146,9 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               fit: BoxFit.fitHeight,
                               child: Row(
                                 children: [
-                                  const Text(
+                                  Text(
                                     NEWUSER,
-                                    style: TextStyle(
+                                    style: GoogleFonts.ptSerif(
                                         fontSize: twenty, color: Colors.white),
                                   ),
                                   const SizedBox(
@@ -158,9 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onTap: () {
                                       Get.toNamed(RouteName.signUpScreen);
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       SIGNUP,
-                                      style: TextStyle(
+                                      style: GoogleFonts.ptSerif(
                                           fontWeight: FontWeight.bold,
                                           fontSize: twenty,
                                           color: Colors.white),
@@ -184,9 +187,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {},
-                              child: const Text(
+                              child: Text(
                                 CONTACTUS,
-                                style: TextStyle(
+                                style: GoogleFonts.ptSerif(
                                     fontSize: five, color: Colors.white),
                               ),
                             ),
@@ -195,9 +198,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: const Text(
+                              child: Text(
                                 PRIVACYPOLICY,
-                                style: TextStyle(
+                                style: GoogleFonts.ptSerif(
                                     fontSize: five, color: Colors.white),
                               ),
                             ),
