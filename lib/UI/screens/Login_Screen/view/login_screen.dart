@@ -115,6 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         controller: loginController
                                             .phoneNoController.value,
                                         keyboardType: TextInputType.number,
+                                        onChanged: (value) => {
+                                          loginController.checkPhoneNumber()
+                                        },
                                         decoration: const InputDecoration(
                                           hintText: 'Enter phone number',
                                           enabledBorder: OutlineInputBorder(
@@ -140,22 +143,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.arrow_forward,
-                                        color: Color(0xFFcf321d),
+                                        color: loginController.isValid.value?Color(0xFFcf321d):Colors.grey,
                                         size: 35,
                                       ),
                                       onPressed: loginController.isValid.value
                                           ? () async {
                                               loginController.test();
+                                              String phoneNo = "+91" +
+                                                  loginController
+                                                      .phoneNoController
+                                                      .value
+                                                      .text;
                                               PostResponseType result =
                                                   await loginController
                                                       .loginApi(
                                                 LoginModel(
-                                                  phone_number: loginController
-                                                      .phoneNoController
-                                                      .value
-                                                      .text,
+                                                  phone_number: phoneNo
                                                 ),
                                               );
                                               if (result.postResponseEnum ==
@@ -167,10 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 Get.toNamed(RouteName.otpScreen,
                                                     arguments: {
                                                       'phoneNumber':
-                                                          loginController
-                                                              .phoneNoController
-                                                              .value
-                                                              .text
+                                                          phoneNo
                                                     });
                                               } else {
                                                 Get.snackbar(

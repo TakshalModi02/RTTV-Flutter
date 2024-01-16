@@ -57,7 +57,8 @@ class SignUpController extends GetxController {
   }
 
   void checkPhoneNumber() {
-    String phoneNumber = phoneNoController.value.text;
+    String phoneNumber = "+91"+phoneNoController.value.text;
+    print(phoneNumber);
     validPhoneNo = phoneNumber.length == 13 && phoneNumber.startsWith("+91");
     checkContraints();
   }

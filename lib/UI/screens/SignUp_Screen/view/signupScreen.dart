@@ -129,14 +129,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     onTap: signUpController.isValid.value
                                         ? () async {
                                             signUpController.test();
+                                            String phoneNo = "+91"+
+                                                signUpController
+                                                    .phoneNoController
+                                                    .value
+                                                    .text;
                                             PostResponseType result =
                                                 await signUpController.signupApi(
                                                     UserModel(
                                                         phone_number:
-                                                            signUpController
-                                                                .phoneNoController
-                                                                .value
-                                                                .text,
+                                                            phoneNo,
                                                         age: signUpController
                                                             .ageController
                                                             .value
@@ -159,10 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               Get.toNamed(RouteName.otpScreen,
                                                   arguments: {
                                                     'phoneNumber':
-                                                        signUpController
-                                                            .phoneNoController
-                                                            .value
-                                                            .text
+                                                        phoneNo,
                                                   });
                                             } else {
                                               Get.snackbar(
