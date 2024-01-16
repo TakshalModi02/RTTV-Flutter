@@ -13,3 +13,4 @@ const double four = 4.0;
 const double twentyfive = 25.0;
 const double twenty = 20.0;
 const double five = 5.0;
+const double sixteen = 16.0;

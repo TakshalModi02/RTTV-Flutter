@@ -79,6 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     onChange: (str) {
                                       signUpController.checkPhoneNumber();
                                     },
+                                    leadingIcon: Icons.phone,
                                   ),
                                 ),
                                 const SizedBox(
@@ -88,14 +89,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: thirty),
                                   child: TextFieldInput(
-                                      textEditingController: signUpController
-                                          .emailController.value,
-                                      hintText: EMAIL,
-                                      textInputType: TextInputType.emailAddress,
-                                      hideText: false,
-                                      onChange: (str) {
-                                        signUpController.checkEmail();
-                                      }),
+                                    textEditingController:
+                                        signUpController.emailController.value,
+                                    hintText: EMAIL,
+                                    textInputType: TextInputType.emailAddress,
+                                    hideText: false,
+                                    onChange: (str) {
+                                      signUpController.checkEmail();
+                                    },
+                                    leadingIcon: Icons.mail,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: eighteen,
@@ -104,53 +107,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: thirty),
                                   child: TextFieldInput(
-                                      textEditingController:
-                                          signUpController.ageController.value,
-                                      hintText: AGE,
-                                      textInputType: TextInputType.number,
-                                      hideText: false,
-                                      onChange: (str) {
-                                        signUpController.checkAge();
-                                      }),
+                                    textEditingController:
+                                        signUpController.ageController.value,
+                                    hintText: AGE,
+                                    textInputType: TextInputType.number,
+                                    hideText: false,
+                                    onChange: (str) {
+                                      signUpController.checkAge();
+                                    },
+                                    leadingIcon: Icons.person,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: twentyfive,
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //       horizontal: thirty),
-                                //   child: TextFieldInput(
-                                //     textEditingController: signUpController
-                                //         .passwordController.value,
-                                //     hintText: PASSWORD,
-                                //     textInputType:
-                                //         TextInputType.visiblePassword,
-                                //     hideText: true,
-                                //     onChange: (str) {
-                                //       signUpController.checkPassword();
-                                //     },
-                                //   ),
-                                // ),
-                                // const SizedBox(
-                                //   height: eighteen,
-                                // ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //       horizontal: thirty),
-                                //   child: TextFieldInput(
-                                //       textEditingController: signUpController
-                                //           .confirmpasswordController.value,
-                                //       hintText: CONFIRM_PASSWORD,
-                                //       textInputType:
-                                //           TextInputType.visiblePassword,
-                                //       hideText: true,
-                                //       onChange: (str) {
-                                //         signUpController.checkPassword();
-                                //       }),
-                                // ),
-                                // const SizedBox(
-                                //   height: thirtysix,
-                                // ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: onehundredtwenty),
@@ -159,21 +129,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     onTap: signUpController.isValid.value
                                         ? () async {
                                             signUpController.test();
+                                            String phoneNo = "+91"+
+                                                signUpController
+                                                    .phoneNoController
+                                                    .value
+                                                    .text;
                                             PostResponseType result =
-                                                await signUpController.signupApi(UserModel(
-                                                    phone_number:
-                                                        signUpController
-                                                            .phoneNoController
+                                                await signUpController.signupApi(
+                                                    UserModel(
+                                                        phone_number:
+                                                            phoneNo,
+                                                        age: signUpController
+                                                            .ageController
                                                             .value
                                                             .text,
-                                                    age: signUpController
-                                                        .ageController
-                                                        .value
-                                                        .text,
-                                                    email: signUpController
-                                                        .emailController
-                                                        .value
-                                                        .text));
+                                                        email: signUpController
+                                                            .emailController
+                                                            .value
+                                                            .text));
 
                                             if (result.postResponseEnum ==
                                                 PostResponseEnum.success) {
@@ -181,8 +154,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                   SUCCESS, result.message,
                                                   snackPosition:
                                                       SnackPosition.BOTTOM);
-                                                      print(signUpController.phoneNoController.value.text);
-                                              Get.toNamed(RouteName.otpScreen, arguments: {'phoneNumber': signUpController.phoneNoController.value.text});
+                                              print(signUpController
+                                                  .phoneNoController
+                                                  .value
+                                                  .text);
+                                              Get.toNamed(RouteName.otpScreen,
+                                                  arguments: {
+                                                    'phoneNumber':
+                                                        phoneNo,
+                                                  });
                                             } else {
                                               Get.snackbar(
                                                   ERROR, result.message,

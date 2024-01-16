@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,78 +73,122 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: eighteen,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: thirty),
-                              child: TextFieldInput(
-                                textEditingController:
-                                    loginController.phoneNoController.value,
-                                hintText: PHONE_NUMBER,
-                                textInputType: TextInputType.emailAddress,
-                                hideText: false,
-                                onChange: (str) {
-                                  loginController.checkPhoneNumber();
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: onehundredtwenty),
-                              child: GestureDetector(
-                                onTap: loginController.isValid.value
-                                    ? () async {
-                                        loginController.test();
-                                        PostResponseType result =
-                                            await loginController.loginApi(
-                                          LoginModel(
-                                            phone_number: loginController
-                                                .phoneNoController.value.text,
-                                          ),
-                                        );
-                                        if (result.postResponseEnum ==
-                                            PostResponseEnum.success) {
-                                          Get.snackbar(SUCCESS, result.message,
-                                              snackPosition:
-                                                  SnackPosition.BOTTOM);
-                                          Get.toNamed(RouteName.otpScreen,
-                                              arguments: {
-                                                'phoneNumber': loginController
-                                                    .phoneNoController
-                                                    .value
-                                                    .text
-                                              });
-                                        } else {
-                                          Get.snackbar(ERROR, result.message,
-                                              snackPosition:
-                                                  SnackPosition.BOTTOM);
-                                        }
-                                      }
-                                    : () {},
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 70, // Adjust the height as needed
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: loginController.isValid.value
-                                        ? Colors.red
-                                        : Colors.grey,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(eight),
-                                    child: Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                      size: thirty,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    // Country Code
+                                    Container(
+                                      padding: const EdgeInsets.all(ten),
+                                      child: const Text(
+                                        '+91',
+                                        style: TextStyle(fontSize: sixteen),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(eight),
+                                      child: Flag.fromCode(
+                                        FlagsCode.IN,
+                                        height: twentyfive,
+                                        width: twentyfive,
+                                        fit: BoxFit.fill,
+                                        flagSize: FlagSize.size_1x1,
+                                        borderRadius: twentyfive,
+                                      ),
+                                    ),
+                                    const SizedBox(width: four),
+                                    Expanded(
+                                      child: TextField(
+                                        controller: loginController
+                                            .phoneNoController.value,
+                                        keyboardType: TextInputType.number,
+                                        onChanged: (value) => {
+                                          loginController.checkPhoneNumber()
+                                        },
+                                        decoration: const InputDecoration(
+                                          hintText: 'Enter phone number',
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.white,
+                                                width: 0.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.white,
+                                                width: 0.0),
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(12.0),
+                                              bottomRight:
+                                                  Radius.circular(12.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                        color: loginController.isValid.value?Color(0xFFcf321d):Colors.grey,
+                                        size: 35,
+                                      ),
+                                      onPressed: loginController.isValid.value
+                                          ? () async {
+                                              loginController.test();
+                                              String phoneNo = "+91" +
+                                                  loginController
+                                                      .phoneNoController
+                                                      .value
+                                                      .text;
+                                              PostResponseType result =
+                                                  await loginController
+                                                      .loginApi(
+                                                LoginModel(
+                                                  phone_number: phoneNo
+                                                ),
+                                              );
+                                              if (result.postResponseEnum ==
+                                                  PostResponseEnum.success) {
+                                                Get.snackbar(
+                                                    SUCCESS, result.message,
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM);
+                                                Get.toNamed(RouteName.otpScreen,
+                                                    arguments: {
+                                                      'phoneNumber':
+                                                          phoneNo
+                                                    });
+                                              } else {
+                                                Get.snackbar(
+                                                    ERROR, result.message,
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM);
+                                              }
+                                            }
+                                          : () {},
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                             const SizedBox(
-                              height: forty,
+                              height: 50,
                             ),
                             FittedBox(
                               fit: BoxFit.fitHeight,
