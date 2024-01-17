@@ -7,7 +7,7 @@ import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/strings.dart';
 
 class OtpController extends GetxController {
-  Future<PostResponseType> verifyOTP(String phoneNumber, String otp) async {
+  Future<PostResponseType> verifyOTP(String phoneNumber, String? otp) async {
     final baseURL = dotenv.env['BASE_URL'];
     final url = Uri.parse(baseURL!+"verify/"+phoneNumber);
     try {
