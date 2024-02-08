@@ -5,6 +5,7 @@ import 'package:rttv/UI/screens/OTP_Screen/controller/otpController.dart';
 import 'package:rttv/UI/screens/OTP_Screen/view/otpScreen.dart';
 import 'package:rttv/UI/screens/SignUp_Screen/view/signupScreen.dart';
 import 'package:rttv/UI/screens/Splash_Screen/view/splashScreen.dart';
+import 'package:rttv/UI/screens/videoPlayer/screen/videoPlayerScreen.dart';
 import 'package:rttv/resources/routes/routes_name.dart';
 
 class AppRoutes {
@@ -34,6 +35,10 @@ class AppRoutes {
       binding: BindingsBuilder(() {
         Get.put(OtpController()); 
       }),
+    ),
+    GetPage(
+      name: RouteName.videoPlayerScreen,
+      page: () => VideoPlayerScreen(),
     ),
   ];
 }
