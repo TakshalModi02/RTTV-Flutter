@@ -67,7 +67,7 @@ class _OtpScreenState extends State<OtpScreen>
       if (result.postResponseEnum == PostResponseEnum.success) {
         bool tokenSaved = await prefs.setString("token", result.data!);
         if (tokenSaved) {
-          Get.toNamed(RouteName.videoPlayerScreen);
+          Get.toNamed(RouteName.videoPlayerScreen, parameters: {'videoID': '65bf99d1ba59a7c7f40b9e7d'});
         }
       } else {
         Get.snackbar(ERROR, result.message,
