@@ -1,3 +1,5 @@
+import 'package:rttv/UI/screens/videoPlayer/model/videoPlayerResponse.dart';
+
 enum PostResponseEnum {
   failed,
   success,
@@ -9,10 +11,12 @@ class PostResponseType {
   PostResponseType({
     required this.postResponseEnum,
     this.message = "default",
-    this.data = ""
+    this.data = "",
+    this.video
   });
 
   final PostResponseEnum postResponseEnum;
   final String message;
   final String? data;
+  final VideoPlayerResponseModel? video;
 }

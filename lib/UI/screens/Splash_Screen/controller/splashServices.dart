@@ -20,10 +20,12 @@ class SplashServices {
   }
 
   void _navigateToLogin() {
-    Get.offAndToNamed(RouteName.loginScreen);
+    // Get.offAndToNamed(RouteName.loginScreen);
+    Get.toNamed(RouteName.videoPlayerScreen, parameters: {'videoID': '65bf99d1ba59a7c7f40b9e7d'});
   }
 
   void _navigateToHome(String token) {
-    Get.offAndToNamed(RouteName.homeScreen, arguments: {'token': token});
+    // Get.offAndToNamed(RouteName.homeScreen, arguments: {'token': token});
+    Get.toNamed(RouteName.videoPlayerScreen, parameters: {'videoID': '65bf99d1ba59a7c7f40b9e7d'});
   }
 }

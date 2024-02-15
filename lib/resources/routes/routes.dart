@@ -10,35 +10,38 @@ import 'package:rttv/resources/routes/routes_name.dart';
 
 class AppRoutes {
   static appRoutes() => [
-    GetPage(
-      name: RouteName.splashScreen,
-      page: () => SplashScreen(),
-    ),
-    GetPage(
-      name: RouteName.loginScreen,
-      page: () => LoginScreen(),
-    ),
-    GetPage(
-      name: RouteName.signUpScreen,
-      page: () => SignUpScreen(),
-    ),
-    GetPage(
-      name: RouteName.otpScreen,
-      page: () => OtpScreen(),
-      binding: BindingsBuilder(() {
-        Get.put(OtpController()); 
-      }),
-    ),
-    GetPage(
-      name: RouteName.homeScreen,
-      page: () => HomeScreen(),
-      binding: BindingsBuilder(() {
-        Get.put(OtpController()); 
-      }),
-    ),
-    GetPage(
-      name: RouteName.videoPlayerScreen,
-      page: () => VideoPlayerScreen(),
-    ),
-  ];
+        GetPage(
+          name: RouteName.splashScreen,
+          page: () => SplashScreen(),
+        ),
+        GetPage(
+          name: RouteName.loginScreen,
+          page: () => LoginScreen(),
+        ),
+        GetPage(
+          name: RouteName.signUpScreen,
+          page: () => SignUpScreen(),
+        ),
+        GetPage(
+          name: RouteName.otpScreen,
+          page: () => OtpScreen(),
+          binding: BindingsBuilder(() {
+            Get.put(OtpController());
+          }),
+        ),
+        GetPage(
+          name: RouteName.homeScreen,
+          page: () => HomeScreen(),
+          binding: BindingsBuilder(() {
+            Get.put(OtpController());
+          }),
+        ),
+        GetPage(
+          name: RouteName.videoPlayerScreen,
+          page: () {
+            String videoID = Get.parameters['videoID']!;
+            return VideoPlayerScreen(id: videoID);
+          },
+        ),
+      ];
 }
