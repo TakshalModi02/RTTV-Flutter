@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 class VideoPlayerScreenController extends GetxController {
   VideoPlayerResponseModel? model;
+  RxBool isLoading = true.obs;
   Future<PostResponseType> intializeController(String id) async {
     try {
       final baseURL = dotenv.env['BASE_URL'];

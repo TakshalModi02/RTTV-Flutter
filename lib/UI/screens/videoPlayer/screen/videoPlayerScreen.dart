@@ -66,99 +66,116 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       allowMuting: true,
       showControlsOnInitialize: false,
     );
+    controller.isLoading.value = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Chewie(
-              controller: chewieController,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Color.fromARGB(255, 57, 56, 53),
-              child: Column(
+    double screenHeight = Get.height;
+    double screenWidth = Get.width;
+    print(screenHeight);
+    print(screenWidth);
+    return Obx(() {
+      return Scaffold(
+        body: controller.isLoading.value
+            ? Center(
+              child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
+            )
+            : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8.0),
-                        child: Text(controller.model!.movieName,
-                            style: GoogleFonts.ptSerif(
-                                fontSize: twentyfive, color: Colors.white)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8.0),
-                        child: Row(
-                          children: [
-                            Text('${controller.model!.star}',
-                                style: GoogleFonts.ptSerif(
-                                    fontSize: twentyfive, color: Colors.white)),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: twentyfive,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Chewie(
+                      controller: chewieController,
+                    ),
                   ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-                        child: Text(
-                            '${controller.model!.languages.map((language) => language['language']).join(", ")} | ',
-                            style: GoogleFonts.sourceSans3(
-                                fontSize: 17, color: Colors.white)),
+                  Expanded(
+                    child: Container(
+                      color: Color.fromARGB(255, 57, 56, 53),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenWidth * 0.03125, vertical: screenHeight * 0.0095),
+                                child: Text(controller.model!.movieName,
+                                    style: GoogleFonts.ptSerif(
+                                        fontSize: screenWidth*0.06510,
+                                        color: Colors.white)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenWidth * 0.03125, vertical: screenHeight * 0.0095),
+                                child: Row(
+                                  children: [
+                                    Text('${controller.model!.star}',
+                                        style: GoogleFonts.ptSerif(
+                                            fontSize: screenWidth*0.06510,
+                                            color: Colors.white)),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: screenWidth*0.06510,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.02971,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(screenWidth * 0.03125, 0, 0, 0),
+                                child: Text(
+                                    '${controller.model!.languages.map((language) => language['language']).join(", ")} | ',
+                                    style: GoogleFonts.sourceSans3(
+                                        fontSize: screenWidth * 0.04427, color: Colors.white)),
+                              ),
+                              Text(
+                                '${controller.model!.genres.map((genre) => genre['genre']).join(", ")} | ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: screenWidth * 0.04427, color: Colors.white),
+                              ),
+                              Text('${controller.model!.duration} minutes | ',
+                                  style: GoogleFonts.sourceSans3(
+                                      fontSize: screenWidth * 0.04427, color: Colors.white)),
+                              Text('${controller.model!.releaseYear}',
+                                  style: GoogleFonts.sourceSans3(
+                                      fontSize: screenWidth * 0.04427, color: Colors.white)),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(screenWidth * 0.03125),
+                            child: Text(
+                                '${controller.model!.cast.map((actor) => actor['name']).join(", ")}',
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: screenWidth * 0.04427, color: Colors.white)),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: screenWidth * 0.03125),
+                            child: Text('${controller.model!.description}',
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: screenWidth * 0.04427, color: Colors.white)),
+                          ),
+                        ],
                       ),
-                      Text(
-                        '${controller.model!.genres.map((genre) => genre['genre']).join(", ")} | ',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
-                      Text('${controller.model!.duration} minutes | ',
-                          style: GoogleFonts.sourceSans3(
-                              fontSize: 17, color: Colors.white)),
-                      Text('${controller.model!.releaseYear}',
-                          style: GoogleFonts.sourceSans3(
-                              fontSize: 17, color: Colors.white)),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                        '${controller.model!.cast.map((actor) => actor['name']).join(", ")}',
-                        style: GoogleFonts.sourceSans3(
-                            fontSize: 17, color: Colors.white)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Text('${controller.model!.description}',
-                        style: GoogleFonts.sourceSans3(
-                            fontSize: 17, color: Colors.white)),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+      );
+    });
   }
 
   @override
