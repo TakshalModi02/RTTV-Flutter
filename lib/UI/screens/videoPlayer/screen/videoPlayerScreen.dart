@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rttv/UI/screens/videoPlayer/controller/videoPlayerController.dart';
 import 'package:rttv/utility/PostResponse/PostResponseType.dart';
 import 'package:rttv/utility/numbers.dart';
@@ -79,10 +80,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       return Scaffold(
         body: controller.isLoading.value
             ? Center(
-              child: CircularProgressIndicator(
-                  color: Colors.red,
+                child: Lottie.asset(
+                  'assets/Animation - 1708575008332.json',
+                  width: screenWidth * 0.2604, // Adjust width as needed
+                  height: screenHeight * 0.1188, // Adjust height as needed
                 ),
-            )
+              )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -103,25 +106,27 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.03125, vertical: screenHeight * 0.0095),
+                                    horizontal: screenWidth * 0.03125,
+                                    vertical: screenHeight * 0.0095),
                                 child: Text(controller.model!.movieName,
                                     style: GoogleFonts.ptSerif(
-                                        fontSize: screenWidth*0.06510,
+                                        fontSize: screenWidth * 0.06510,
                                         color: Colors.white)),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.03125, vertical: screenHeight * 0.0095),
+                                    horizontal: screenWidth * 0.03125,
+                                    vertical: screenHeight * 0.0095),
                                 child: Row(
                                   children: [
                                     Text('${controller.model!.star}',
                                         style: GoogleFonts.ptSerif(
-                                            fontSize: screenWidth*0.06510,
+                                            fontSize: screenWidth * 0.06510,
                                             color: Colors.white)),
                                     Icon(
                                       Icons.star,
                                       color: Colors.yellow,
-                                      size: screenWidth*0.06510,
+                                      size: screenWidth * 0.06510,
                                     ),
                                   ],
                                 ),
@@ -135,23 +140,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(screenWidth * 0.03125, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(
+                                    screenWidth * 0.03125, 0, 0, 0),
                                 child: Text(
                                     '${controller.model!.languages.map((language) => language['language']).join(", ")} | ',
                                     style: GoogleFonts.sourceSans3(
-                                        fontSize: screenWidth * 0.04427, color: Colors.white)),
+                                        fontSize: screenWidth * 0.04427,
+                                        color: Colors.white)),
                               ),
                               Text(
                                 '${controller.model!.genres.map((genre) => genre['genre']).join(", ")} | ',
                                 style: GoogleFonts.sourceSans3(
-                                    fontSize: screenWidth * 0.04427, color: Colors.white),
+                                    fontSize: screenWidth * 0.04427,
+                                    color: Colors.white),
                               ),
                               Text('${controller.model!.duration} minutes | ',
                                   style: GoogleFonts.sourceSans3(
-                                      fontSize: screenWidth * 0.04427, color: Colors.white)),
+                                      fontSize: screenWidth * 0.04427,
+                                      color: Colors.white)),
                               Text('${controller.model!.releaseYear}',
                                   style: GoogleFonts.sourceSans3(
-                                      fontSize: screenWidth * 0.04427, color: Colors.white)),
+                                      fontSize: screenWidth * 0.04427,
+                                      color: Colors.white)),
                             ],
                           ),
                           Padding(
@@ -159,14 +169,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             child: Text(
                                 '${controller.model!.cast.map((actor) => actor['name']).join(", ")}',
                                 style: GoogleFonts.sourceSans3(
-                                    fontSize: screenWidth * 0.04427, color: Colors.white)),
+                                    fontSize: screenWidth * 0.04427,
+                                    color: Colors.white)),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: screenWidth * 0.03125),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.03125),
                             child: Text('${controller.model!.description}',
                                 style: GoogleFonts.sourceSans3(
-                                    fontSize: screenWidth * 0.04427, color: Colors.white)),
+                                    fontSize: screenWidth * 0.04427,
+                                    color: Colors.white)),
                           ),
                         ],
                       ),
